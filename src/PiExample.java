@@ -8,21 +8,32 @@ public class PiExample {
     public static void main(String[] args) {
         Scanner read = new Scanner(System.in);
 
-        System.out.print("Entrez un entier : ");
+        System.out.print("Select the nth decimal : ");
         int val = read.nextInt();
         double log = (Math.pow(10, val));
 
         read.close();
 
         BigDecimal pi = calculatePi(val);
-        System.out.println(pi);
+        if (val == 1) {
+            System.out.println("BBP Pi value for the " + val + "st decimal is : " + pi);
+        }
+        else {
+            System.out.println("BBP Pi value for the " + val + "th decimal is : " + pi);
+        }
+
         pi = pi.multiply(BigDecimal.valueOf(log));
         pi = pi.remainder(BigDecimal.valueOf(10));
 
-        MathContext mathContext = new MathContext(1, RoundingMode.UP);
+        MathContext mathContext = new MathContext(1, RoundingMode.FLOOR);
 
         pi = pi.round(mathContext);
-        System.out.println(pi);
+        if (val == 1) {
+            System.out.println("The " + val + "st decimal is : " + pi);
+        }
+        else {
+            System.out.println("The " + val + "th decimal is : " + pi);
+        }
     }
 
     public static BigDecimal calculatePi(int precision) {
